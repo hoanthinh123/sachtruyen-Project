@@ -12,7 +12,7 @@ class TruyenController extends Controller
      */
     public function index()
     {
-        //
+        return view("admin.truyen.index");
     }
 
     /**
@@ -21,6 +21,8 @@ class TruyenController extends Controller
     public function create()
     {
         //
+        return view("admin.truyen.create");
+
     }
 
     /**
@@ -29,6 +31,8 @@ class TruyenController extends Controller
     public function store(Request $request)
     {
         //
+       
+
     }
 
     /**

@@ -19,8 +19,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Login, register, logout
+Route::get('/login', [AuthController::class, 'getLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
 
+Route::get('/register', [AuthController::class, 'getRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
 
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+//client
 Route::get('/', function () {
     return view('welcome');
 });
@@ -43,20 +50,19 @@ Route::middleware([Authenticate::class, CheckAuth::class])->group(function () {
             Route::get('/', [AdminDanhmucTruyenController::class, 'index'])->name('admin.danhmuc.index');
             Route::get('/create', [AdminDanhmucTruyenController::class, 'create'])->name('admin.danhmuc.create');
             Route::post('/create', [AdminDanhmucTruyenController::class, 'store'])->name('admin.danhmuc.store');
-            Route::get('/edit/{user}', [AdminDanhmucTruyenController::class, 'edit'])->name('admin.danhmuc.edit');
-            Route::put('/edit/{user}', [AdminDanhmucTruyenController::class, 'update'])->name('admin.danhmuc.update');
-            Route::delete('/delete/{user}', [AdminDanhmucTruyenController::class, 'destroy'])->name('admin.danhmuc.destroy');
+            Route::get('/edit/{danhmuc}', [AdminDanhmucTruyenController::class, 'edit'])->name('admin.danhmuc.edit');
+            Route::put('/edit/{danhmuc}', [AdminDanhmucTruyenController::class, 'update'])->name('admin.danhmuc.update');
+            Route::delete('/delete/{danhmuc}', [AdminDanhmucTruyenController::class, 'destroy'])->name('admin.danhmuc.destroy');
         });
 
         // truyện
-        Route::resource('/truyen', TruyenController::class);
+        Route::prefix('/truyen')->group(function () {
+            Route::get('/', [TruyenController::class, 'index'])->name('admin.truyen.index');
+            Route::get('/create', [TruyenController::class, 'create'])->name('admin.truyen.create');
+            Route::post('/create', [TruyenController::class, 'store'])->name('admin.truyen.store');
+            Route::get('/edit/{truyen}', [TruyenController::class, 'edit'])->name('admin.truyen.edit');
+            Route::put('/edit/{truyen}', [TruyenController::class, 'update'])->name('admin.truyen.update');
+            Route::delete('/delete/{truyen}', [TruyenController::class, 'destroy'])->name('admin.truyen.destroy');
+        });
     });
 });
-//Login, register, logout
-Route::get('/login', [AuthController::class, 'getLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
-
-Route::get('/register', [AuthController::class, 'getRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
-
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

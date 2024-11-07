@@ -36,11 +36,11 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar ">
-        <h4 class="text-white">Admin Panel</h4>
+        <h4 class="text-white">Admin Sách Truyện</h4>
         <a href="{{route('admin.users.home')}}">Dashboard</a>
         <a href="{{route('admin.users.index')}}">Users</a>
         <a href="{{route('admin.danhmuc.index')}}">Danh mục truyện</a>
-        <a href="">Category</a>
+        <a href="{{route('admin.truyen.index')}}">Truyện</a>
 
        
         <a href="{{route('login')}}"> {{Auth::user()->username}} Logout</a>
